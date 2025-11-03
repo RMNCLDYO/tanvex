@@ -5,7 +5,7 @@ export function ModeToggle() {
   const { toggleMode } = useTheme()
 
   const handleToggleMode = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault()
     e.stopPropagation()

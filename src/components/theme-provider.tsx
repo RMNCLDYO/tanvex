@@ -1,15 +1,15 @@
 import { ScriptOnce } from '@tanstack/react-router'
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
-import type { ThemeMode, ResolvedTheme } from '@/lib/theme'
+import type { ResolvedTheme, ThemeMode } from '@/lib/theme'
 import {
-  getStoredThemeMode,
-  setStoredThemeMode,
-  getSystemTheme,
-  updateThemeClass,
-  setupPreferredListener,
   getNextTheme,
+  getStoredThemeMode,
+  getSystemTheme,
+  setStoredThemeMode,
+  setupPreferredListener,
   themeDetectorScript,
+  updateThemeClass,
 } from '@/lib/theme'
 
 type ThemeProviderProps = {
