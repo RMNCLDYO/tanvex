@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/api/auth/$')({
-  loader: async () => {
+  loader: () => {
     // This loader is required but won't be used for API routes
     return null
   },
