@@ -1,4 +1,4 @@
-import { createFileRoute, json  } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 
 // Proxy auth requests to Convex http.ts which handles Better Auth via authComponent.registerRoutes
 export const Route = createFileRoute('/api/auth/$')({
@@ -13,10 +13,7 @@ export const Route = createFileRoute('/api/auth/$')({
       body: request.method !== 'GET' ? await request.text() : undefined,
     })
 
-    const data = await response.json()
-    return json(data, {
-      status: response.status,
-      headers: response.headers,
-    })
+    // Return the full response from Convex
+    return response
   },
 })
