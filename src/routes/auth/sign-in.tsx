@@ -30,14 +30,19 @@ function SignIn() {
     setIsLoading(true)
 
     try {
-      await authClient.signIn.email({
-        email,
-        password,
-      })
-      navigate({ to: '/' })
+      await authClient.signIn.email(
+        {
+          email,
+          password,
+        },
+        {
+          onSuccess: () => {
+            navigate({ to: '/' })
+          },
+        },
+      )
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to sign in')
-    } finally {
       setIsLoading(false)
     }
   }

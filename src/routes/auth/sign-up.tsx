@@ -31,15 +31,20 @@ function SignUp() {
     setIsLoading(true)
 
     try {
-      await authClient.signUp.email({
-        name,
-        email,
-        password,
-      })
-      navigate({ to: '/' })
+      await authClient.signUp.email(
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          onSuccess: () => {
+            navigate({ to: '/' })
+          },
+        },
+      )
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to sign up')
-    } finally {
       setIsLoading(false)
     }
   }
