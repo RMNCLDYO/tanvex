@@ -8,7 +8,7 @@ export const Route = createFileRoute('/demo/start/api-request')({
 })
 
 function Home() {
-  const { data: names } = useSuspenseQuery(convexQuery(api.names.get, {}))
+  const { data: demos } = useSuspenseQuery(convexQuery(api.demos.get, {}))
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 py-6 -mt-3">
@@ -18,21 +18,27 @@ function Home() {
             Convex Query Demo
           </h1>
           <p className="text-muted-foreground">
-            Fetch and display data from Convex with real-time updates
+            Fetch and display demo tasks from Convex with real-time updates
           </p>
         </div>
 
         <div className="space-y-4">
-          <ul className="space-y-2">
-            {names.map((item) => (
-              <li
-                key={item._id}
-                className="border rounded-lg p-4 bg-card text-card-foreground"
-              >
-                {item.name}
-              </li>
-            ))}
-          </ul>
+          {demos.length === 0 ? (
+            <p className="text-center text-muted-foreground">
+              No demo tasks found. Add some data to the demos table!
+            </p>
+          ) : (
+            <ul className="space-y-2">
+              {demos.map((item) => (
+                <li
+                  key={item._id}
+                  className="border rounded-lg p-4 bg-card text-card-foreground"
+                >
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
