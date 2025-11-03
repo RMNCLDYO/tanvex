@@ -1,4 +1,5 @@
 import path from 'node:path'
+import fs from 'node:fs'
 import { defineConfig } from 'vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
@@ -18,6 +19,16 @@ const config = defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    https: {
+      key: fs.readFileSync(
+        path.resolve(__dirname, 'certificates/localhost-key.pem'),
+      ),
+      cert: fs.readFileSync(
+        path.resolve(__dirname, 'certificates/localhost.pem'),
+      ),
     },
   },
 })
