@@ -1,51 +1,27 @@
+import { convexQuery } from '@convex-dev/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
-import { Button } from '@/components/ui/button'
+import { api } from '../../convex/_generated/api'
 
 export const Route = createFileRoute('/')({
-  component: App,
+  component: Home,
 })
 
-function App() {
+function Home() {
+  const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}))
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 text-center min-h-full -my-6">
-      <img
-        src={logo}
-        className="h-40 w-40 pointer-events-none animate-[spin_20s_linear_infinite] mb-8"
-        alt="logo"
-      />
-
-      <h1 className="text-4xl font-bold tracking-tight mb-4">
-        Welcome to TanStack Start
-      </h1>
-
-      <p className="text-muted-foreground text-lg mb-8 max-w-md">
-        Edit{' '}
-        <code className="text-sm font-mono bg-muted px-1.5 py-0.5 rounded">
-          src/routes/index.tsx
-        </code>{' '}
-        and save to reload.
-      </p>
-
-      <div className="flex gap-4">
-        <Button variant="default" asChild>
-          <a
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-1 flex-col items-center justify-center px-6 min-h-full -my-6">
+      <h1 className="text-4xl font-bold tracking-tight mb-8">Tasks</h1>
+      <div className="w-full max-w-md space-y-2">
+        {data.map(({ _id, text }) => (
+          <div
+            key={_id}
+            className="p-4 border rounded-lg bg-card text-card-foreground"
           >
-            Learn React
-          </a>
-        </Button>
-        <Button variant="outline" asChild>
-          <a
-            href="https://tanstack.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn TanStack
-          </a>
-        </Button>
+            {text}
+          </div>
+        ))}
       </div>
     </div>
   )
