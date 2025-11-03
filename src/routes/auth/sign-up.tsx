@@ -39,6 +39,7 @@ function SignUp() {
         },
         {
           onSuccess: () => {
+            // Navigate to home - session will be refetched automatically
             navigate({ to: '/' })
           },
         },
