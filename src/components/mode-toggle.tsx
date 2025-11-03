@@ -14,7 +14,7 @@ export function ModeToggle() {
   }
 
   if (!mounted) {
-    return <Skeleton className="size-8 rounded-md" />
+    return <Skeleton className="size-8 rounded-full" />
   }
 
   return (
