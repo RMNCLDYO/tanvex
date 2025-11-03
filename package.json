@@ -33,6 +33,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
+    "generate": "bunx convex dev --once",
     "lint": "eslint",
     "check": "prettier --check . && eslint",
     "format": "prettier --write . && eslint --fix"
