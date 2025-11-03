@@ -1,7 +1,32 @@
 {
-  "name": "tanstack-start-bun-hosting",
-  "private": true,
+  "name": "tanvex",
+  "version": "0.1.0",
+  "description": "Modern TanStack Start template with Bun runtime and production server",
+  "private": false,
   "type": "module",
+  "keywords": [
+    "tanstack",
+    "tanstack-start",
+    "tanstack-router",
+    "react",
+    "react-19",
+    "bun",
+    "vite",
+    "typescript",
+    "tailwindcss",
+    "shadcn-ui",
+    "template"
+  ],
+  "author": "RMNCLDYO",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RMNCLDYO/tanvex"
+  },
+  "bugs": {
+    "url": "https://github.com/RMNCLDYO/tanvex/issues"
+  },
+  "homepage": "https://github.com/RMNCLDYO/tanvex#readme",
   "scripts": {
     "dev": "vite dev --port 3000",
     "start": "bun run server.ts",
