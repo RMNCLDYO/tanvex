@@ -12,24 +12,24 @@ export const Route = createFileRoute('/demo/start/server-funcs')({
 })
 
 function Home() {
-  const { data: todos } = useSuspenseQuery(convexQuery(api.todos.get, {}))
-  const addTodo = useConvexMutation(api.todos.add)
-  const removeTodo = useConvexMutation(api.todos.remove)
+  const { data: tasks } = useSuspenseQuery(convexQuery(api.tasks.get, {}))
+  const addTask = useConvexMutation(api.tasks.add)
+  const removeTask = useConvexMutation(api.tasks.remove)
 
   const [todo, setTodo] = useState('')
 
   const submitTodo = useCallback(async () => {
     if (todo.trim()) {
-      await addTodo({ name: todo })
+      await addTask({ text: todo })
       setTodo('')
     }
-  }, [addTodo, todo])
+  }, [addTask, todo])
 
   const handleRemove = useCallback(
     async (id: string) => {
-      await removeTodo({ id: id as any })
+      await removeTask({ id: id as any })
     },
-    [removeTodo],
+    [removeTask],
   )
 
   return (
@@ -45,25 +45,31 @@ function Home() {
         </div>
 
         <div className="space-y-4">
-          <ul className="space-y-2">
-            {todos.map((t) => (
-              <li
-                key={t._id}
-                className="border rounded-lg p-4 bg-card text-card-foreground flex items-center justify-between gap-4"
-              >
-                <span>{t.name}</span>
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  onClick={() => handleRemove(t._id)}
-                  className="shrink-0"
-                  aria-label="Delete todo"
+          {tasks.length === 0 ? (
+            <p className="text-center text-muted-foreground">
+              No tasks yet. Add one below!
+            </p>
+          ) : (
+            <ul className="space-y-2">
+              {tasks.map((t) => (
+                <li
+                  key={t._id}
+                  className="border rounded-lg p-4 bg-card text-card-foreground flex items-center justify-between gap-4"
                 >
-                  <X className="h-4 w-4" />
-                </Button>
-              </li>
-            ))}
-          </ul>
+                  <span>{t.text}</span>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={() => handleRemove(t._id)}
+                    className="shrink-0"
+                    aria-label="Delete task"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="flex gap-2">
             <Input
