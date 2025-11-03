@@ -21,6 +21,7 @@ type ThemeContextValue = {
   resolvedTheme: ResolvedTheme
   setTheme: (theme: ThemeMode) => void
   toggleMode: () => void
+  mounted: boolean
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
@@ -57,7 +58,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   return (
     <ThemeContext.Provider
-      value={{ themeMode, resolvedTheme, setTheme, toggleMode }}
+      value={{ themeMode, resolvedTheme, setTheme, toggleMode, mounted }}
     >
       <ScriptOnce children={themeDetectorScript} />
       {children}

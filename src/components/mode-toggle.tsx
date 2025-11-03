@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useTheme } from '@/components/theme-provider'
 
 export function ModeToggle() {
-  const { toggleMode } = useTheme()
+  const { toggleMode, mounted } = useTheme()
 
   const handleToggleMode = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -10,6 +11,10 @@ export function ModeToggle() {
     e.preventDefault()
     e.stopPropagation()
     toggleMode()
+  }
+
+  if (!mounted) {
+    return <Skeleton className="size-8 rounded-md" />
   }
 
   return (
