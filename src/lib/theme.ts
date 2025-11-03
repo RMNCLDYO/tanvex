@@ -42,9 +42,12 @@ export const updateThemeClass = createClientOnlyFn((themeMode: ThemeMode) => {
   root.classList.remove('light', 'dark', 'auto')
 
   // Determine the actual theme to apply
-  const resolvedTheme = themeMode === 'auto'
-    ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    : themeMode
+  const resolvedTheme =
+    themeMode === 'auto'
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      : themeMode
 
   // Add the resolved theme class
   root.classList.add(resolvedTheme)
@@ -62,16 +65,19 @@ export const setupPreferredListener = createClientOnlyFn(() => {
   return () => mediaQuery.removeEventListener('change', handler)
 })
 
-export const getNextTheme = createClientOnlyFn((current: ThemeMode): ThemeMode => {
-  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light'
-  const themes: ThemeMode[] =
-    systemTheme === 'dark'
-      ? ['auto', 'light', 'dark']
-      : ['auto', 'dark', 'light']
-  return themes[(themes.indexOf(current) + 1) % themes.length]
-})
+export const getNextTheme = createClientOnlyFn(
+  (current: ThemeMode): ThemeMode => {
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light'
+    const themes: Array<ThemeMode> =
+      systemTheme === 'dark'
+        ? ['auto', 'light', 'dark']
+        : ['auto', 'dark', 'light']
+    return themes[(themes.indexOf(current) + 1) % themes.length]
+  },
+)
 
 export const themeDetectorScript = (function () {
   function themeFn() {
